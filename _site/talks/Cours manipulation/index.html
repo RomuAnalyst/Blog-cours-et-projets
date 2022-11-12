@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Profs programmation R">
+<meta name="dcterms.date" content="2022-09-19">
+
+<title>Romuald ZAMI - Cours de manipulation des données</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/Purple tree.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="twitter:title" content="Romuald ZAMI - Cours de manipulation des données">
+<meta name="twitter:description" content="Servane.Gey@parisdescartes.fr - Bureau B4-18">
+<meta name="twitter:creator" content="@Romuald">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <img src="../../images/Purple tree.png" alt="">
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"><i class="fa-solid fa-house-user"></i> Accueil</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"><i class="fa-solid fa-laptop-code"></i> Blog</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks.html"><i class="fa-solid fa-chalkboard-user"></i> Talks</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"><i class="fa-solid fa-chart-line"></i> Projects</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"><i class="fa-solid fa-address-card"></i> About</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../vitae.html"><i class="fa-solid fa-paperclip"></i> Vitae</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:romu.zami@gmail.com"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/robertmitchellv"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/Romu_Zam"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/robertmitchellv"><i class="bi bi-linkedin" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Cours de manipulation des données</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Talk</div>
+                <div class="quarto-category">Shiny</div>
+                <div class="quarto-category">Dashboards</div>
+                <div class="quarto-category">Interactive</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Profs programmation R </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 19, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="coordonnées-et-références" class="level2">
+<h2 class="anchored" data-anchor-id="coordonnées-et-références">Coordonnées et références</h2>
+<p>Servane.Gey@parisdescartes.fr - Bureau B4-18 </p>
+<ul>
+<li><p><strong>Documents</strong> : Moodle, COMMUN</p></li>
+<li><p><strong>Références</strong> (liste non-exhaustive) :</p>
+<ul>
+<li><em>Cours de F.-X. Jollois</em> : https://fxjollois.github.io/cours-2018-2019/stid-2afa–prog-r/</li>
+<li><em>R for Data Science</em>, H. Wickham &amp; G. Grolemund, O’Reilly, (https://r4ds.had.co.nz/)</li>
+<li><em>The Grammar of Graphics</em>, L. Wilkinson, Springer (https://www.springer.com/us/book/9780387245447)</li>
+<li><em>Tidyverse</em> : https://tidyverse.tidyverse.org/</li>
+<li><em>Visualisation</em> : https://ggplot2.tidyverse.org/reference/</li>
+<li><em>Applications Web</em> : https://shiny.rstudio.com/</li>
+<li><em>R Markdown</em> : https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf</li>
+<li><em>RStudio Cheat Sheets</em> : https://www.rstudio.com/resources/cheatsheets/</li>
+</ul></li>
+</ul>
+</section>
+<section id="organisation-et-validation" class="level2">
+<h2 class="anchored" data-anchor-id="organisation-et-validation">Organisation et validation</h2>
+<ul>
+<li><strong>Organisation</strong> :
+<ul>
+<li>33h de cours et TP répartis sur 11 séances de 3h</li>
+</ul></li>
+<li><strong>Validation</strong> :
+<ul>
+<li><p>1 TP noté en milieu de semestre (50 %)</p></li>
+<li><p>1 DST sur machine en fin de semestre (50 %)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="plan-du-cours" class="level2">
+<h2 class="anchored" data-anchor-id="plan-du-cours">Plan du cours</h2>
+<ol type="1">
+<li><strong>Manipulation et analyse de données</strong>
+<ul>
+<li>Importation et exportation de données (package <em>readr</em>)</li>
+<li>Manipulation de tables de données (package <em>dplyr</em>)</li>
+<li>Statistiques : quelques exemples avec <em>dplyr</em></li>
+</ul></li>
+<li><strong>Visualisation de Données</strong>
+<ul>
+<li>Représentations graphiques (package <em>ggplot2</em>)</li>
+<li>Cartographie (package <em>leaflet</em>)</li>
+</ul></li>
+<li><strong>Fonctions</strong>
+<ul>
+<li>Ecriture de fonctions avec <em>dplyr</em></li>
+<li>Fonctions spécifiques à l’analyse de données</li>
+<li>Gestion des sorties sous forme de listes</li>
+</ul></li>
+<li><strong>Rapports et Présentations</strong>
+<ul>
+<li>Rappels sur R Markdown</li>
+<li>Rédaction de rapports et de présentations</li>
+</ul></li>
+<li><strong>Applications Web</strong>
+<ul>
+<li>Rappels sur R Shiny</li>
+<li>Tableaux de bord (package <em>shinydashboard</em>)</li>
+<li>Conception d’une application avec interface utilisateur</li>
+</ul></li>
+</ol>
+</section>
+<section id="installation-de-r-et-rstudio-en-local" class="level2">
+<h2 class="anchored" data-anchor-id="installation-de-r-et-rstudio-en-local">Installation de R et RStudio en local</h2>
+<ul>
+<li><p>Télécharger la dernière version de R adaptée à votre système d’exploitation (Windows, Mac OS, Linux) via le CRAN de l’université de Lyon : https://pbil.univ-lyon1.fr/CRAN/</p></li>
+<li><p>Télécharger la dernière version de RStudio adaptée à votre système d’exploitation (Windows, Mac OS, Linux) via le site rstudio : https://rstudio.com/products/rstudio/download/</p></li>
+<li><p>Installer les 2 logiciels en éxécutant les fichiers téléchargés.</p></li>
+<li><p><strong>Attention</strong> RStudio est une interface graphique très évoluée pour une utilisation simplifiée du logiciel R. L’installation de R au préalable est donc indispensable avant toute utilisation de RStudio.</p></li>
+<li><p>L’installation des librairies (ou <em>packages</em>) peut se faire directement via la console, ou via l’interface de RStudio.</p></li>
+</ul>
+</section>
+<section id="serveur-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="serveur-rstudio">Serveur RStudio</h2>
+<ul>
+<li><p>Serveur dédié à l’utiliation de R, dont la dernière version y est installée, avec toutes les librairies régulièrement mises à jour.</p></li>
+<li><p>Connexion sur l’interface RStudio directement via la connexion sur le serveur.</p></li>
+<li><p>Serveur RStudio de l’IUT (disponible uniquement en local, i.e.&nbsp;sur les ordinateurs de l’IUT) : hhtp://rstudio.iutparis.local:8787/</p></li>
+<li><p>Première connexion : login et mot de passe = login de l’IUT.</p></li>
+<li><p>Changer immédiatement votre mot de passe (voir le mail de M. Jollois).</p></li>
+</ul>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<ul>
+<li><strong>R</strong> :
+<ul>
+<li>langage de programmation pour le traitement des données</li>
+<li>fonctions propres intégrées au langage</li>
+<li>nombreuses librairies</li>
+</ul></li>
+<li><strong>tidyverse</strong> :
+<ul>
+<li>ensemble de librairies développées par l’équipe de R Studio</li>
+<li>librairies principalement utilisées dans ce cours : <em>magrittr</em>, <em>tibble</em>, <em>dplyr</em>, <em>readr</em>, <em>readxls</em>, <em>ggplot2</em></li>
+</ul></li>
+<li><strong>Data frames</strong> :
+<ul>
+<li>format des données dans R</li>
+<li><em>observations</em> (=individus) en lignes et <em>variables</em> en colonnes</li>
+</ul></li>
+<li><strong>tibble</strong> :
+<ul>
+<li>format <em>tbl_df</em> basé sur un <em>data.frame</em></li>
+<li>traitement identique aux <em>data.frame</em></li>
+</ul></li>
+<li><strong>Conseils</strong> :
+<ul>
+<li>préférer les librairies développées par des laboratoires ou des entreprises (mises à jour susceptibles d’être plus régulières)</li>
+<li>écrire et sauvegarder ses codes dans un script R ou R Studio</li>
+<li>se référencer à l’aide pour l’utilisation des fonctions</li>
+</ul></li>
+</ul>
+</section>
+<section id="les-données-avec-tibble" class="level2">
+<h2 class="anchored" data-anchor-id="les-données-avec-tibble">Les données avec <em>tibble</em></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 32 × 11
+     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+ 2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+ 3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+ 4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+ 5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+ 6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+ 7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+ 8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+ 9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+# … with 22 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="manipulation-et-analyse-de-données" class="level1">
+<h1>Manipulation et Analyse de Données</h1>
+<section id="importation-de-données-à-partir-de-fichiers-externes" class="level2">
+<h2 class="anchored" data-anchor-id="importation-de-données-à-partir-de-fichiers-externes">Importation de données à partir de fichiers externes</h2>
+<ul>
+<li><p>Importation de données à partir de fihiers externes de divers formats</p></li>
+<li><p>Importation à partir d’un fichier .txt :</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">=</span> <span class="fu">read_delim</span>(<span class="st">"Donnees/iris.txt"</span>, <span class="at">delim=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 5
+   `Sepal Length` `Sepal Width` `Petal Length` `Petal Width` Species
+            &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;  
+ 1            5.1           3.5            1.4           0.2 setosa 
+ 2            4.9           3              1.4           0.2 setosa 
+ 3            4.7           3.2            1.3           0.2 setosa 
+ 4            4.6           3.1            1.5           0.2 setosa 
+ 5            5             3.6            1.4           0.2 setosa 
+ 6            5.4           3.9            1.7           0.4 setosa 
+ 7            4.6           3.4            1.4           0.3 setosa 
+ 8            5             3.4            1.5           0.2 setosa 
+ 9            4.4           2.9            1.4           0.2 setosa 
+10            4.9           3.1            1.5           0.1 setosa 
+# … with 140 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="importation-de-données-à-partir-de-fichiers-externes-2" class="level2">
+<h2 class="anchored" data-anchor-id="importation-de-données-à-partir-de-fichiers-externes-2">Importation de données à partir de fichiers externes (2)</h2>
+<ul>
+<li>Importation à partir d’un fichier .xlsx :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">"Donnees/iris.xlsx"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [150 × 5] (S3: tbl_df/tbl/data.frame)
+ $ Sepal Length: num [1:150] 5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+ $ Sepal Width : num [1:150] 3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+ $ Petal Length: num [1:150] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+ $ Petal Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+ $ Species     : chr [1:150] "setosa" "setosa" "setosa" "setosa" ...</code></pre>
+</div>
+</div>
+</section>
+<section id="importation-de-données-à-partir-de-fichiers-externes-3" class="level2">
+<h2 class="anchored" data-anchor-id="importation-de-données-à-partir-de-fichiers-externes-3">Importation de données à partir de fichiers externes (3)</h2>
+<ul>
+<li>Importation à partir d’un fichier SAS :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">=</span> <span class="fu">read_sas</span>(<span class="st">"Donnees/iris.sas7bdat"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 5
+   Sepal_Length Sepal_Width Petal_Length Petal_Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# … with 140 more rows</code></pre>
+</div>
+</div>
+<!-- ## Importation de données issues du Web -->
+<!-- * Données de type JSON (très utilisé sur le web)  -->
+<!-- * Exemple : site [SWAPI](https://swapi.co/) référençant toutes les informations disponibles sur la saga Star Wars  -->
+<!-- ```{r} -->
+<!-- library(jsonlite) -->
+<!-- fromJSON("https://swapi.co/api/people/1/") -->
+<!-- ``` -->
+</section>
+<section id="importation-de-données-issues-du-web-2" class="level2">
+<h2 class="anchored" data-anchor-id="importation-de-données-issues-du-web-2">Importation de données issues du Web (2)</h2>
+<ol start="2" type="1">
+<li>Lecture de pages Web
+<ul>
+<li>Exemple</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sw <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">"https://www.imdb.com/title/tt0076759/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="manipulation-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données">Manipulation de données</h2>
+<ul>
+<li>Le “pipe” %&gt;% (package <em>magrittr</em>) : ctrl+shift+m + permet d’enchaîner les opérations + écriture plus naturelle et plus lisible</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">11</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.875</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.875</code></pre>
+</div>
+</div>
+<ul>
+<li>Manipulation de données (package <em>dplyr</em>) : ajouts de variables, filtres, organisation, etc…</li>
+</ul>
+</section>
+<section id="manipulation-de-données-2" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données-2">Manipulation de données (2)</h2>
+<ul>
+<li>Ajouter à la table de données mtcars le nom des modèles de voiture contenu dans les noms de lignes de la table (nouvelle variable dénommée <em>model</em>) :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span> <span class="fu">rownames_to_column</span>(<span class="st">"model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Filtrer les observations suivant les valeurs de variables</li>
+</ul>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">filter</span>(mpg<span class="sc">&gt;=</span><span class="dv">30</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">4</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">filter</span>(cyl<span class="sc">==</span><span class="dv">4</span> <span class="sc">&amp;</span> qsec <span class="sc">&gt;</span><span class="dv">17</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">between</span>(mpg, <span class="dv">30</span>, <span class="dv">32</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="manipulation-de-données-3" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données-3">Manipulation de données (3)</h2>
+<ul>
+<li>Sélection de lignes par leurs indices (numéros)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">6</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">n</span>(), <span class="at">by=</span><span class="dv">4</span>))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">31</span><span class="sc">:</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>où <span class="math inline">\(n()\)</span> est le nombre de lignes de la table</p>
+<ul>
+<li>Sélection de variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(model)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg,cyl,model)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">7</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"m"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Voir ?select_helpers pour la liste des possibilités</p>
+</section>
+<section id="manipulation-de-données-4" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données-4">Manipulation de données (4)</h2>
+<ul>
+<li>Tri selon les valeurs d’une ou plusieurs variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(mpg)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(am,mpg)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>où desc() indique un ordre décroissant.</p>
+<ul>
+<li>Ajout de variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cyl_ratio=</span>cyl<span class="sc">/</span>carb)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cyl_ratio=</span>cyl<span class="sc">/</span>carb, <span class="at">wt_ratio=</span>wt<span class="sc">/</span>hp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Pour garder uniquement la variable créée</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(<span class="at">cyl_ratio=</span>cyl<span class="sc">/</span>carb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="manipulation-de-données-5" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données-5">Manipulation de données (5)</h2>
+<ul>
+<li>Suppression des doublons</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(cars<span class="sc">$</span>cyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6 4 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(cyl) <span class="sc">%&gt;%</span> distinct</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  cyl
+1   6
+2   4
+3   8</code></pre>
+</div>
+</div>
+</section>
+<section id="manipulation-de-données-6" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données-6">Manipulation de données (6)</h2>
+<ul>
+<li>Enchaîner les opérations</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"c"</span>)) <span class="sc">%&gt;%</span> summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      cyl             carb      
+ Min.   :4.000   Min.   :1.000  
+ 1st Qu.:4.000   1st Qu.:2.000  
+ Median :6.000   Median :2.000  
+ Mean   :6.188   Mean   :2.812  
+ 3rd Qu.:8.000   3rd Qu.:4.000  
+ Max.   :8.000   Max.   :8.000  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg,wt,hp) <span class="sc">%&gt;%</span> as_tibble <span class="sc">%&gt;%</span> head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+    mpg    wt    hp
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1  21    2.62   110
+2  21    2.88   110
+3  22.8  2.32    93
+4  21.4  3.22   110
+5  18.7  3.44   175
+6  18.1  3.46   105</code></pre>
+</div>
+</div>
+</section>
+<section id="manipulation-de-données-7" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données-7">Manipulation de données (7)</h2>
+<ul>
+<li>Grouper les individus en fonction des modalités d’une variable</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Exemple : déterminer le nombre de modèles de la table <em>cars</em> dans chaque catégorie de cylindre</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+    cyl     n
+  &lt;dbl&gt; &lt;int&gt;
+1     4    11
+2     6     7
+3     8    14</code></pre>
+</div>
+</div>
+</section>
+<section id="manipulation-de-données-8" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données-8">Manipulation de données (8)</h2>
+<ul>
+<li>Joindre deux tables en fonction des valeurs de l’une des variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>engine <span class="ot">=</span> <span class="fu">tibble</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">cyl =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">12</span>),</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"medium"</span>, <span class="st">"big"</span>, <span class="st">"very big"</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Extraction des tables en jointure entre cars et engine :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">inner_join</span>(engine) </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(engine)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">right_join</span>(engine)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">full_join</span>(engine)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">semi_join</span>(engine)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(engine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tp-exercice-1-avec-tibble-dplyr-et-readr" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-1-avec-tibble-dplyr-et-readr">TP : Exercice 1 (avec <em>tibble</em>, <em>dplyr</em> et <em>readr</em>)</h2>
+<ul>
+<li>Donner la liste des différentes espèces d’iris dans la table <em>iris</em></li>
+<li>Sélectionner
+<ul>
+<li>les 60 premiers iris de la table</li>
+<li>les 50 derniers iris de la table</li>
+<li>1 iris sur 10 dans la table</li>
+</ul></li>
+<li>Sélectionner les iris ayant les plus longues Sépales et les plus longues Pétales. En donner la répartition par espèce.</li>
+<li>Créer une nouvelle table en organisant la table <em>iris</em> par ordre alphabétique des espèces et par ordre croissant des longueurs de Sépale</li>
+<li>Créer une nouvelle table en ajoutant 2 colonnes à la table <em>iris</em> contenant respectivement les rapports longueur/largeur de Sépale et de Pétale</li>
+<li>Importer les 4 tables concernant les indicateurs de gouvernance fournis par la banque mondiale, <em>WGIValues.csv</em>, <em>WGICountry.csv</em>, <em>WGISerie.csv</em> et <em>WGIType.csv</em></li>
+<li>Créer une nouvelle table contenant les noms des pays, séries et indicateurs à la place des codes correspondants</li>
+</ul>
+</section>
+<section id="données-spécifiques" class="level2">
+<h2 class="anchored" data-anchor-id="données-spécifiques">Données spécifiques</h2>
+<ul>
+<li>Gestion de chaînes de caractères (package <em>stringr</em>) :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(cars<span class="sc">$</span>model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  9 13 10 14 17  7 10  9  8  8  9 10 10 11 18 19 17  8 11 14 13 16 11 10 16
+[26]  9 13 12 14 12 13 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(cars<span class="sc">$</span>model, <span class="at">collapse =</span> <span class="st">", "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Mazda RX4, Mazda RX4 Wag, Datsun 710, Hornet 4 Drive, Hornet Sportabout, Valiant, Duster 360, Merc 240D, Merc 230, Merc 280, Merc 280C, Merc 450SE, Merc 450SL, Merc 450SLC, Cadillac Fleetwood, Lincoln Continental, Chrysler Imperial, Fiat 128, Honda Civic, Toyota Corolla, Toyota Corona, Dodge Challenger, AMC Javelin, Camaro Z28, Pontiac Firebird, Fiat X1-9, Porsche 914-2, Lotus Europa, Ford Pantera L, Ferrari Dino, Maserati Bora, Volvo 142E"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(cars<span class="sc">$</span>model, <span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Mazda" "Mazda" "Datsu" "Horne" "Horne" "Valia" "Duste" "Merc " "Merc "
+[10] "Merc " "Merc " "Merc " "Merc " "Merc " "Cadil" "Linco" "Chrys" "Fiat "
+[19] "Honda" "Toyot" "Toyot" "Dodge" "AMC J" "Camar" "Ponti" "Fiat " "Porsc"
+[28] "Lotus" "Ford " "Ferra" "Maser" "Volvo"</code></pre>
+</div>
+</div>
+</section>
+<section id="données-spécifiques-2" class="level2">
+<h2 class="anchored" data-anchor-id="données-spécifiques-2">Données spécifiques (2)</h2>
+<ul>
+<li>Gestion des expressions régulières (package <em>stringr</em>) :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(cars<span class="sc">$</span>model, <span class="st">"Merc"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(cars<span class="sc">$</span>model, <span class="st">"[0-9]"</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(cars<span class="sc">$</span>model, <span class="st">"[0-9]"</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str_match</span>(cars<span class="sc">$</span>model, <span class="st">"(.+)[ ](.+)"</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(cars<span class="sc">$</span>model, <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tp-exercice-2-avec-stringr" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-2-avec-stringr">TP : Exercice 2 (avec <em>stringr</em>)</h2>
+<ul>
+<li><p>Créer le vecteur x composé des <span class="math inline">\(5\)</span> chaînes de caractères suivantes : “Je” “suis” “en” “DUT” “STID”</p></li>
+<li><p>Ajouter la chaîne “alternance” à la fin du vecteur x</p></li>
+<li><p>Donner le nombre de caractères composant chaque élément de x</p></li>
+<li><p>Ajouter une majuscule à “alternance” (indication : str_to_title)</p></li>
+<li><p>Trouver tous les éléments de x contenant le caractère “e” et les extraire.</p></li>
+<li><p>Concaténer les éléments de x afin de ne former qu’une seule phrase. Combien de caractères contient ce nouvel objet ? Interpréter.</p></li>
+<li><p>Re-découper l’objet obtenu en chaînes de caractères distinctes</p></li>
+</ul>
+</section>
+<section id="dates" class="level2">
+<h2 class="anchored" data-anchor-id="dates">Dates</h2>
+<ul>
+<li>Gestion des dates aisée (package <em>lubridate</em>)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">now</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2022-11-12 12:36:25 CET"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>today <span class="ot">=</span> <span class="fu">today</span>()</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>today</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2022-11-12"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(today)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2022</code></pre>
+</div>
+</div>
+</section>
+<section id="dates-2" class="level2">
+<h2 class="anchored" data-anchor-id="dates-2">Dates (2)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(today)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(today, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(today, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">abbr =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">day</span>(today)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mday</span>(today)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(today)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(today, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(today, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">week_start =</span> <span class="dv">1</span>)</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(today, <span class="at">week_start =</span> <span class="dv">1</span>)</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="fu">yday</span>(today)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dates-3" class="level2">
+<h2 class="anchored" data-anchor-id="dates-3">Dates (3)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>today <span class="sc">+</span> <span class="fu">period</span>(<span class="at">week =</span> <span class="dv">1</span>, <span class="at">day =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2022-11-22"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>today <span class="sc">+</span> <span class="fu">period</span>(<span class="st">"1W 3D"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2022-11-22"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>today <span class="sc">-</span> <span class="fu">years</span>(<span class="dv">1</span>) <span class="sc">-</span> <span class="fu">days</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2021-11-02"</code></pre>
+</div>
+</div>
+</section>
+<section id="dates-4" class="level2">
+<h2 class="anchored" data-anchor-id="dates-4">Dates (4)</h2>
+<ul>
+<li>Calculer des périodes en secondes ou en années (par défaut en jours) :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>bday <span class="ot">=</span> <span class="fu">ymd</span>(<span class="st">"19771114"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">=</span> today <span class="sc">-</span> bday</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 16434 days</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.period</span>(diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "16434d 0H 0M 0S"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.duration</span>(diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1419897600s (~44.99 years)"</code></pre>
+</div>
+</div>
+</section>
+<section id="tp-exercice-3-avec-tibble-dplyr-stringr" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-3-avec-tibble-dplyr-stringr">TP : Exercice 3 (avec <em>tibble</em>, <em>dplyr</em>, <em>stringr</em>)</h2>
+<ul>
+<li>Afficher le jeu de données <em>starwars</em> (package <em>dplyr</em>)</li>
+<li>Donner le nombre total de personnages distincts apparaissant dans les trilogies “Star Wars” (indication : nrow)</li>
+<li>Donner le pourcentage de valeurs manquantes par variable (indication : is.na, colSums)</li>
+<li>Faire de même avec les personnages (indication : rowSums)</li>
+<li>Lister les différentes races des personnages de la table <em>starwars</em>. Combien de races apparaissent dans les trilogies “Star Wars” ?</li>
+<li>Donner le nombre de personnages dans chaque race, en triant par ordre décroissant de ce nombre</li>
+<li>Choisir 2 races pour lesquelles on dénombre plus de 2 personnages et donner le nom de ces personnages. Quels sont les personnages dont la race est indéfinie ? (indication : is.na)</li>
+<li><strong>Optionnel</strong> : donner les noms des personnages ayant changé de couleur de cheveux (indication : regarder la variable hair_color et utiliser la librairie <em>stringr</em>)</li>
+<li><strong>Optionnel</strong> : quels personnages apparaissent dans plus de 4 films ? (indication : bind_cols, add_column)</li>
+</ul>
+</section>
+<section id="statistiques-sous-r-quelques-exemples" class="level2">
+<h2 class="anchored" data-anchor-id="statistiques-sous-r-quelques-exemples">Statistiques sous R : quelques exemples</h2>
+<ul>
+<li>Résumer une ou plusieurs variables dans un data.frame :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>(), <span class="at">mpg_av=</span><span class="fu">mean</span>(mpg), </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">wt_med=</span><span class="fu">median</span>(wt))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   n   mpg_av wt_med
+1 32 20.09062  3.325</code></pre>
+</div>
+</div>
+<ul>
+<li>Résumer toutes les variables dans un data.frame suivant le même indicateur statistique :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       mpg    cyl     disp       hp     drat      wt     qsec     vs      am
+1 20.09062 6.1875 230.7219 146.6875 3.596563 3.21725 17.84875 0.4375 0.40625
+    gear   carb
+1 3.6875 2.8125</code></pre>
+</div>
+</div>
+</section>
+<section id="statistiques-sous-r-quelques-exemples-2" class="level2">
+<h2 class="anchored" data-anchor-id="statistiques-sous-r-quelques-exemples-2">Statistiques sous R : quelques exemples (2)</h2>
+<ul>
+<li>Résumer par groupes définis par les modalités d’une variable :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>(), <span class="at">mpg_av=</span><span class="fu">mean</span>(mpg), <span class="at">wt_med=</span><span class="fu">median</span>(wt))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+    cyl     n mpg_av wt_med
+  &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1     4    11   26.7   2.2 
+2     6     7   19.7   3.22
+3     8    14   15.1   3.76</code></pre>
+</div>
+</div>
+</section>
+<section id="statistiques-sous-r-quelques-exemples-2-1" class="level2">
+<h2 class="anchored" data-anchor-id="statistiques-sous-r-quelques-exemples-2-1">Statistiques sous R : quelques exemples (2)</h2>
+<ul>
+<li>Utilisation des fonctions descriptives classiques</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg,wt,qsec) <span class="sc">%&gt;%</span> colMeans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     mpg       wt     qsec 
+20.09062  3.21725 17.84875 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg,wt,qsec) <span class="sc">%&gt;%</span> cor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            mpg         wt       qsec
+mpg   1.0000000 -0.8676594  0.4186840
+wt   -0.8676594  1.0000000 -0.1747159
+qsec  0.4186840 -0.1747159  1.0000000</code></pre>
+</div>
+</div>
+</section>
+<section id="statistiques-sous-r-quelques-exemples-3" class="level2">
+<h2 class="anchored" data-anchor-id="statistiques-sous-r-quelques-exemples-3">Statistiques sous R : quelques exemples (3)</h2>
+<ul>
+<li>Calculs d’agrégats sur toutes les variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span> </span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(cyl,mpg,wt,qsec) <span class="sc">%&gt;%</span> </span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+    cyl   mpg    wt  qsec
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     4  26.7  2.29  19.1
+2     6  19.7  3.12  18.0
+3     8  15.1  4.00  16.8</code></pre>
+</div>
+</div>
+</section>
+<section id="statistiques-sous-r-quelques-exemples-4" class="level2">
+<h2 class="anchored" data-anchor-id="statistiques-sous-r-quelques-exemples-4">Statistiques sous R : quelques exemples (4)</h2>
+<ul>
+<li>Production de graphiques avec les fonctions de base</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg,wt) <span class="sc">%&gt;%</span> </span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">main=</span><span class="st">"Weight vs Miles/gallon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</section>
+<section id="tp-exercice-4-avec-tibble-dplyr" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-4-avec-tibble-dplyr">TP : Exercice 4 (avec <em>tibble</em>, <em>dplyr</em>)</h2>
+<ul>
+<li><p>Afficher les indicateurs statistiques résumant les données <em>iris</em></p></li>
+<li><p>Créer deux tables résumant ces mêmes données dont les valeurs sont, par espèce, le nombre d’iris, les moyennes et les médianes de chaque variable, l’une concernant les Sépales, l’autre les Pétales</p></li>
+<li><p>Créer une seule table rassemblant toutes les informations précédentes</p></li>
+<li><p>Représenter la distribution des espèces sous forme de diagramme en barres et de diagramme circulaire (indication : table, barplot, pie)</p></li>
+<li><p>Représenter le lien entre la couleur des yeux et la couleur des cheveux des personnages de la base de données <em>starwars</em> (indication : table, barplot)</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><i class="fa-solid fa-user-circle"></i> 2022 - Romuald ZAMI</div>   
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ <img src="../../images/animation_transparent.png" width="auto" height="60px">
+  </li>  
+</ul>
+      </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/robertmitchellv">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/Romu_Zam">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/robertmitchellv">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
