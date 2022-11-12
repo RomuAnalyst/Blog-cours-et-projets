@@ -1,6 +1,6 @@
 project:
   type: website
-
+  output-dir: docs
 website:
   title: "Romuald ZAMI"
   description: "Site web/Blog"

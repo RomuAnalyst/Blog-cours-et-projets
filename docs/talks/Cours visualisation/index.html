@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Profs programmation R - STID VCOD">
+<meta name="dcterms.date" content="2022-10-31">
+
+<title>Romuald ZAMI - Cours de visualisation des données</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/Purple tree.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="twitter:title" content="Romuald ZAMI - Cours de visualisation des données">
+<meta name="twitter:description" content="Trois syntaxes donnant le même résultat :">
+<meta name="twitter:creator" content="@Romuald">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <img src="../../images/Purple tree.png" alt="">
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"><i class="fa-solid fa-house-user"></i> Accueil</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"><i class="fa-solid fa-laptop-code"></i> Blog</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks.html"><i class="fa-solid fa-chalkboard-user"></i> Talks</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"><i class="fa-solid fa-chart-line"></i> Projects</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"><i class="fa-solid fa-address-card"></i> About</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../vitae.html"><i class="fa-solid fa-paperclip"></i> Vitae</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:romu.zami@gmail.com"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/robertmitchellv"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/Romu_Zam"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/robertmitchellv"><i class="bi bi-linkedin" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Cours de visualisation des données</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Cours</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Profs programmation R - STID VCOD </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 31, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction-librairie-ggplot2-wickham-2010" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-librairie-ggplot2-wickham-2010">Introduction : librairie <em>ggplot2</em> (<a href="https://www.tandfonline.com/doi/abs/10.1198/jcgs.2009.07098">Wickham 2010</a>)</h2>
+<ul>
+<li>Permet une représentation des données plus aisée et plus lisible lorsque l’on traite plus de 2 variables.</li>
+<li>Adaptée au format <em>tibble</em>, sous-librairie de <em>tidyverse</em>.</li>
+<li>Construite sur une <strong>grammaire superposée</strong>, basée sur la <em>grammaire des graphiques</em> proposée par <a href="https://www.springer.com/us/book/9780387245447">Wilkinson en 2005</a>.</li>
+<li>Graphiques construits en <strong>couches indépendantes</strong>, à inclure selon la représentation souhaitée :
+<ul>
+<li>les <strong>données</strong> à représenter ainsi que leurs <strong>attributs esthétiques</strong> (axes, taille, couleurs, symboles, …)</li>
+<li>les <strong>attributs géométriques</strong> (points, lignes, barres, …)</li>
+<li>les <strong>transformations statistiques</strong> (dénombrement, tendances, …)</li>
+<li>les <strong>échelles</strong></li>
+<li>le <strong>système de coordonnées</strong> (cartésien, logarithmique, …)</li>
+<li>le <strong>découpage en facettes</strong> (plusieurs graphiques dans la même fenêtre).</li>
+</ul></li>
+<li><strong>Valeurs par défaut</strong>: par exemple, couche <em>transformation statistique</em> effectuée par défaut si la couche <em>attributs géométriques</em> est “boxplot”.</li>
+</ul>
+</section>
+<section id="ggplot2-fonctions-et-couches" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot2-fonctions-et-couches">ggplot2 : fonctions et couches</h2>
+<ul>
+<li><p><strong>ggplot()</strong> : fonction principale, crée et renvoie le graphique, en définissant quelles données sont représentées.</p></li>
+<li><p><strong>aes()</strong> : définit les attributs esthétiques.</p></li>
+<li><p><strong>geom_xxx()</strong> : définit la couche <em>attributs géométriques</em>.</p></li>
+<li><p><strong>stat_xxx()</strong> : définit la couche <em>transformations statistiques</em>.</p></li>
+<li><p><strong>scale_xxx()</strong> : définit la couche <em>échelles</em>.</p></li>
+<li><p><strong>coord_xxx()</strong> : définit la couche <em>système de coordonnées</em>.</p></li>
+<li><p><strong>facet_xxx()</strong> : définit la couche <em>découpage en facettes</em>.</p></li>
+<li><p><strong>theme_xxx(), labs(), xlab(), ylab(), ggtitle()</strong> : pour personnaliser le graphique.</p></li>
+<li><p>Seule <em>aes()</em> s’utilise à l’intérieur des autres fonctions, toutes les couches étant gérées de manière indépendante.</p></li>
+<li><p>Possibilité d’enregistrer la sortie de <em>ggplot()</em> dans une variable, puis de lui ajouter des couches. Appeler la variable pour afficher le graphique.</p></li>
+</ul>
+</section>
+<section id="représentation-en-couches" class="level2">
+<h2 class="anchored" data-anchor-id="représentation-en-couches">Représentation en couches</h2>
+<ul>
+<li><p><strong>Couche principale</strong> : avec <em>ggplot()</em> et <em>aes()</em>, définition des données à représenter et des axes de coordonnées.</p></li>
+<li><p>Exemple avec les données <em>diamonds</em> :</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="représentation-en-couches-2" class="level2">
+<h2 class="anchored" data-anchor-id="représentation-en-couches-2">Représentation en couches (2)</h2>
+<ul>
+<li><p><strong>Couche attributs géométriques</strong> : ajout de la représentation souhaitée pour les données définies dans <em>ggplot()</em>.</p></li>
+<li><p>Exemple : ajout de l’histogramme de la variable <em>carat</em> :</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><strong>Remarque</strong> : dans cet exemple, la couche <em>transformations statistiques</em> est cachée, correspondant au calcul des classes, amplitudes et densités de l’histogramme.</li>
+</ul>
+</section>
+<section id="représentation-en-couches-3" class="level2">
+<h2 class="anchored" data-anchor-id="représentation-en-couches-3">Représentation en couches (3)</h2>
+<ul>
+<li>Stockage du résultat dans une variable, à laquelle on peut ajouter des couches</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="représentation-en-couches-4" class="level2">
+<h2 class="anchored" data-anchor-id="représentation-en-couches-4">Représentation en couches (4)</h2>
+<ul>
+<li>Stockage du résultat dans une variable, à laquelle on peut ajouter des couches</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="personnalisation" class="level2">
+<h2 class="anchored" data-anchor-id="personnalisation">Personnalisation</h2>
+<ul>
+<li>Ajout d’un titre au graphique avec <em>ggtitle()</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Distribution des carats"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="personnalisation-2" class="level2">
+<h2 class="anchored" data-anchor-id="personnalisation-2">Personnalisation (2)</h2>
+<ul>
+<li>Changement du thème par défaut en classique avec <em>theme_classic()</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Distribution des carats"</span>)<span class="sc">+</span><span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="personnalisation-3" class="level2">
+<h2 class="anchored" data-anchor-id="personnalisation-3">Personnalisation (3)</h2>
+<ul>
+<li>Changement du thème par défaut sans le fond gris avec <em>theme_light()</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Distribution des carats"</span>)<span class="sc">+</span><span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Autres thèmes disponibles dans la librairie (voir ?theme_light)</li>
+</ul>
+</section>
+<section id="personnalisation-4" class="level2">
+<h2 class="anchored" data-anchor-id="personnalisation-4">Personnalisation (4)</h2>
+<ul>
+<li>Gestion du nom de l’axe horizontal (abcisses) avec <em>xlab()</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Distribution des carats"</span>)<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">"Carats"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="personnalisation-5" class="level2">
+<h2 class="anchored" data-anchor-id="personnalisation-5">Personnalisation (5)</h2>
+<ul>
+<li>Gestion du nom de l’axe vertical (ordonnées) avec <em>ylab()</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">"Distribution des carats"</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">"Effectif"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="personnalisation-6" class="level2">
+<h2 class="anchored" data-anchor-id="personnalisation-6">Personnalisation (6)</h2>
+<ul>
+<li>Gestion du titre et des noms des axes avec <em>labs()</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Distribution des carats"</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Carats"</span>, <span class="at">y=</span><span class="st">"Effectif"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Personnalisation de la position, taille, couleur, etc… d’un nom ou titre avec <em>theme()</em></li>
+</ul>
+</section>
+<section id="aspect-suivant-une-variable" class="level2">
+<h2 class="anchored" data-anchor-id="aspect-suivant-une-variable">Aspect suivant une variable</h2>
+<ul>
+<li>Exemple : création d’une barre de comptage avec <em>geom_bar()</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>))<span class="sc">+</span><span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="aspect-suivant-une-variable-2" class="level2">
+<h2 class="anchored" data-anchor-id="aspect-suivant-une-variable-2">Aspect suivant une variable (2)</h2>
+<ul>
+<li>Exemple : remplissage de la barre avec des couleurs suivant les modalités de la variable <em>cut</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">fill=</span>cut))<span class="sc">+</span><span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Remarque : légendes par défaut, peuvent être personnalisées (voir suite du cours)</li>
+</ul>
+</section>
+<section id="tp-exercice-1" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-1">TP : Exercice 1</h2>
+<ul>
+<li><p>Représenter l’histogramme de la distribution de la variable <em>Sepal.Length</em> du jeu de données <em>iris</em> avec les valeurs par défaut.</p></li>
+<li><p>Changer le nombre de classes (=<em>bins</em>) souhaitées dans l’histogramme afin d’obtenir une distribution moins variable (indication : options <em>bins</em> <strong>ou</strong> <em>binwidth</em> dans la couche <em>geom_histogram</em>).</p></li>
+<li><p>Changer le thème afin d’obtenir un graphique sans fond gris.</p></li>
+<li><p>Ajouter un titre et des noms adaptés aux axes sur le graphique obtenu.</p></li>
+<li><p>Représenter la distribution des espèces sous forme de barre empilée. Ajouter un titre et enlever le nom de l’axe des abcisses.</p></li>
+<li><p>Représenter la distribution de la variable <em>Sepal.Length</em> conditionnellement à l’espèce sous forme de boîtes à moustaches (indication : <em>geom_boxplot</em>). Ajouter un titre et changer les noms des axes.</p></li>
+</ul>
+</section>
+<section id="changement-déchelle" class="level2">
+<h2 class="anchored" data-anchor-id="changement-déchelle">Changement d’échelle</h2>
+<ul>
+<li><p>Changement d’échelle en utilisant une formule dans <em>aes()</em>,</p></li>
+<li><p>Changement d’échelle en utilisant les variables crées par les fonctions du type <em>geom_xxx()</em>, de type <em>..xxx..</em>,</p></li>
+<li><p>Changement d’échelle en ajoutant une couche avec les fonctions du type <em>scale_aspect esthétique à modifier_type de l’aspect()</em>.</p></li>
+<li><p>Exemple : changer l’effectif en fréquence ou en pourcentage dans un diagramme.</p></li>
+</ul>
+</section>
+<section id="changement-déchelle-2" class="level2">
+<h2 class="anchored" data-anchor-id="changement-déchelle-2">Changement d’échelle (2)</h2>
+<ul>
+<li>Exemple : changer l’effectif en fréquence dans le diagramme précédent en utilisant la variable <em>..count..</em> créée par <em>geom_bar()</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">fill=</span>cut))<span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y=</span>..count..<span class="sc">/</span><span class="fu">sum</span>(..count..)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="changement-déchelle-3" class="level2">
+<h2 class="anchored" data-anchor-id="changement-déchelle-3">Changement d’échelle (3)</h2>
+<ul>
+<li>Remarque : option <em>position=“fill”</em> dans <em>geom_bar()</em> pour le changement en fréquence <span class="math inline">\(\Rightarrow\)</span> même résultat.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">fill=</span>cut))<span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="changement-déchelle-4" class="level2">
+<h2 class="anchored" data-anchor-id="changement-déchelle-4">Changement d’échelle (4)</h2>
+<ul>
+<li>Changer l’effectif en fréquence, puis la fréquence en pourcentage : fonction <em>scale_y_continuous()</em> (où <em>percent()</em> est chargé via la librairie <em>scales</em>)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">fill=</span>cut))<span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)<span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> percent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="changement-de-coordonnées" class="level2">
+<h2 class="anchored" data-anchor-id="changement-de-coordonnées">Changement de coordonnées</h2>
+<ul>
+<li><p>Suivant le type de graphique souhaité, il peut être nécessaire de changer le type de coordonnées représentées.</p></li>
+<li><p>Exemples typiques:</p>
+<ul>
+<li>coordonnées cartésiennes (x,y) pour représenter une variable en fonction d’une autre,</li>
+<li>coordonnées logarithmiques (x, log(y)) pour représenter des concentrations,</li>
+<li>coordonnées polaires (xcos(y), xsin(y)) pour effectuer des diagrammes circulaires.</li>
+</ul></li>
+<li><p>Par défaut, <em>ggplot()</em> représente les variables en coordonnées cartésiennes.</p></li>
+<li><p>Changement de coordonnées effectué en ajoutant une couche avec les fonctions du type <em>coord_xxx()</em>.</p></li>
+</ul>
+</section>
+<section id="changement-de-coordonnées-2" class="level2">
+<h2 class="anchored" data-anchor-id="changement-de-coordonnées-2">Changement de coordonnées (2)</h2>
+<ul>
+<li>Exemple : représentation de la distribution de la variable <em>cut</em> sous forme de diagramme circulaire avec la fonction <em>coord_polar()</em> (option <em>width=1</em> pour enlever le trou au centre du diagramme)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">fill =</span> cut)) <span class="sc">+</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> percent) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" style="width:45.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="changement-de-coordonnées-3" class="level2">
+<h2 class="anchored" data-anchor-id="changement-de-coordonnées-3">Changement de coordonnées (3)</h2>
+<ul>
+<li>Exemple de code complet pour un diagramme circulaire propre :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">fill =</span> cut)) <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> percent) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Variable cut"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>où :
+<ul>
+<li><em>scale_fill_brewer(palette=xxx)</em> change les couleurs de remplissage,</li>
+<li><em>theme(axis.title=element_blank())</em> enlève les noms des axes,</li>
+<li><em>labs(fill=xxx)</em> change le nom de la légende.</li>
+</ul></li>
+</ul>
+</section>
+<section id="changement-de-coordonnées-4" class="level2">
+<h2 class="anchored" data-anchor-id="changement-de-coordonnées-4">Changement de coordonnées (4)</h2>
+<ul>
+<li>Résultat du code précédent :</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tp-exercice-2-avec-ggplot2-et-scales" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-2-avec-ggplot2-et-scales">TP : Exercice 2 avec ggplot2 et scales</h2>
+<ul>
+<li><p>Reprendre l’histogramme créé dans l’exercice 1. Changer l’échelle des ordonnées afin d’avoir une représentation en densité (indication : variable <em>..density..</em> en sortie de la couche <em>geom_histogram</em>). Ajouter un titre et changer le nom des axes.</p></li>
+<li><p>Représenter sur le même graphique un histogramme par espèce.</p></li>
+<li><p>Représenter la distribution des espèces sous forme de diagramme en barres horizontales (indication : <em>coord_flip()</em>). Ajouter un titre et changer les noms des axes.</p></li>
+<li><p>Refaire le même graphique avec une distribution en pourcentages.</p></li>
+<li><p>Représenter la distribution des espèces sous forme de diagramme circulaire avec les valeurs par défaut.</p></li>
+<li><p>Refaire le graphique précédent avec une représentation propre et un titre.</p></li>
+</ul>
+</section>
+<section id="superposition-de-graphiques" class="level2">
+<h2 class="anchored" data-anchor-id="superposition-de-graphiques">Superposition de graphiques</h2>
+<ul>
+<li>Aisée grâce à la grammaire ordonnée et la représentation en couches</li>
+<li>Exemple : nuage de points des variables <em>carat</em> et <em>price</em> avec <em>geom_point()</em>, et ajout des valeurs sur les axes avec <em>geom_rug()</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price))<span class="sc">+</span><span class="fu">geom_point</span>()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">geom_rug</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="superposition-de-graphiques-2" class="level2">
+<h2 class="anchored" data-anchor-id="superposition-de-graphiques-2">Superposition de graphiques (2)</h2>
+<ul>
+<li>Exemple : ajout d’une courbe de régression avec <em>geom_smooth()</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price))<span class="sc">+</span><span class="fu">geom_point</span>()</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">geom_rug</span>()<span class="sc">+</span><span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="superposition-de-graphiques-3" class="level2">
+<h2 class="anchored" data-anchor-id="superposition-de-graphiques-3">Superposition de graphiques (3)</h2>
+<ul>
+<li>Exemple : ajouter la droite de régression avec <em>geom_smooth()</em> (option <em>se=FALSE</em> pour enlever l’intervalle de prédiction)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price))<span class="sc">+</span><span class="fu">geom_point</span>()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="superposition-de-graphiques-4" class="level2">
+<h2 class="anchored" data-anchor-id="superposition-de-graphiques-4">Superposition de graphiques (4)</h2>
+<ul>
+<li>Représenter les points suivant les valeurs d’une variable avec <em>shape</em> et <em>col</em></li>
+<li>Exemple : nuage de points et courbe de régression avec des formes et des couleurs suivant les valeurs de la variable <em>cut</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price, <span class="at">shape=</span>cut, <span class="at">col=</span>cut))<span class="sc">+</span><span class="fu">geom_point</span>()</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facettes" class="level2">
+<h2 class="anchored" data-anchor-id="facettes">Facettes</h2>
+<ul>
+<li>Afin de comparer différents graphiques, il peut être plus judicieux d’utiliser les facettes avec <em>facet_wrap()</em> et <em>facet_grid()</em></li>
+<li>Exemple : graphique précédent avec un graphique par valeur de la variable <em>cut</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price))<span class="sc">+</span><span class="fu">geom_point</span>()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>)<span class="sc">+</span><span class="fu">facet_wrap</span>(<span class="at">facets=</span><span class="sc">~</span>cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facettes-2" class="level2">
+<h2 class="anchored" data-anchor-id="facettes-2">Facettes (2)</h2>
+<ul>
+<li>Réglage de la position des facettes avec les options <em>ncol=</em> et <em>nrow=</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price))<span class="sc">+</span><span class="fu">geom_point</span>()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>)<span class="sc">+</span><span class="fu">facet_wrap</span>(<span class="at">facets=</span><span class="sc">~</span>cut, <span class="at">ncol=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facettes-3" class="level2">
+<h2 class="anchored" data-anchor-id="facettes-3">Facettes (3)</h2>
+<ul>
+<li><em>facet_wrap()</em> : réglage automatique de la position des facettes en fonction du nombre de modalités,</li>
+<li><em>facet_grid()</em> : répartition sur une seule ligne, ou une seule colonne.</li>
+<li>Exemple : représentation en ligne des boîtes à moustaches de <em>carat</em> suivant les modalités de la variable <em>color</em>, et ce pour chaque modalité de la variable <em>cut</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(color, carat))<span class="sc">+</span><span class="fu">geom_boxplot</span>()</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">facet_grid</span>(<span class="at">facets=</span><span class="sc">~</span>cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facettes-4" class="level2">
+<h2 class="anchored" data-anchor-id="facettes-4">Facettes (4)</h2>
+<ul>
+<li>Représentation en colonne des histogrammes de <em>carat</em> suivant les modalités de la variable <em>cut</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">facet_grid</span>(<span class="at">facets=</span>cut<span class="sc">~</span>.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facettes-5" class="level2">
+<h2 class="anchored" data-anchor-id="facettes-5">Facettes (5)</h2>
+<ul>
+<li>Gestion des échelles sur chaque facette : laisser libre l’échelle des ordonnées avec <em>scales=“free_y”</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">facet_grid</span>(<span class="at">facets=</span>cut<span class="sc">~</span>., <span class="at">scales=</span><span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facettes-6" class="level2">
+<h2 class="anchored" data-anchor-id="facettes-6">Facettes (6)</h2>
+<ul>
+<li>Possibilité de faire une graphique par couple de modalités</li>
+<li>Exemple : un nuage de point de <em>price</em> en fonction de <em>carat</em>, avec la droite de régression, et ce pour chaque modalité de la variable <em>color</em> (en lignes) et de la variable <em>cut</em> (en colonnes)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">fullrange =</span> T)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>g<span class="sc">+</span><span class="fu">facet_grid</span>(<span class="at">facets =</span> color <span class="sc">~</span> cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="facettes-7" class="level2">
+<h2 class="anchored" data-anchor-id="facettes-7">Facettes (7)</h2>
+<ul>
+<li>Résultat du code précédent</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tp-exercice-3-avec-ggplot2-et-scales" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-3-avec-ggplot2-et-scales">TP : Exercice 3 avec ggplot2 et scales</h2>
+<ul>
+<li><p>Représenter le nuage de points des longueurs de Sépales en fonction de leurs largeurs. Ajouter la courbe de régression.</p></li>
+<li><p>Refaire la question précédente avec, sur le même graphique, des formes et des couleurs de points différents pour chaque espèce. Ajouter les droites de régression et les indicateurs de valeurs par espèce.</p></li>
+<li><p>Séparer le graphique précédent en facettes, avec un graphique par espèces.<br>
+</p></li>
+<li><p>Reprendre l’histogramme en densité créé dans l’exercice 2. Représenter sur une colonne un histogramme par espèce d’iris.</p></li>
+</ul>
+</section>
+<section id="changements-dans-la-légende" class="level2">
+<h2 class="anchored" data-anchor-id="changements-dans-la-légende">Changements dans la légende</h2>
+<ul>
+<li><p>Changement de position : couche <em>theme(legend.position = xxx)</em> avec <em>xxx</em> = “left”, “top”, “right”, “bottom”, “none” (supprime la légende).</p></li>
+<li><p>Changement de titre : couche <em>labs(xxx=nom)</em> s’il existe une variable pour <em>xxx</em>, où <em>xxx=fill</em>, <em>color</em>, etc… Suppression du titre avec <em>nom = element_blank()</em>.</p></li>
+<li><p>Changement de l’ordre des modalités : couche <em>scale_xxx_discrete(limits = c(yyy))</em>, où</p>
+<ul>
+<li><em>xxx=x</em> si modalités en abcisse et <em>xxx=y</em> si modalités en ordonnée,</li>
+<li><em>yyy</em> nouvel ordre d’apparition des modalités.</li>
+</ul></li>
+<li><p>Changement des modalités dans la légende : couche <em>scale_xxx_hue(labels = )</em> s’il existe une variable pour <em>xxx</em>, où <em>xxx=fill</em>, <em>color</em>, etc….</p></li>
+</ul>
+</section>
+<section id="gestion-des-tables-complexes-avec-gather" class="level2">
+<h2 class="anchored" data-anchor-id="gestion-des-tables-complexes-avec-gather">Gestion des tables complexes avec <em>gather</em></h2>
+<ul>
+<li><p>Fonction <em>gather()</em> (librairie <em>tidyr</em>) : crée une table longue en déployant la table de données (=table large) sur 2 colonnes <em>(key,value)</em>, où <em>key</em> est le nom de la variable, et <em>value</em> sa valeur pour chaque observation.</p></li>
+<li><p>Exemple : déploiement de la table <em>diamonds</em> sur les variables <em>carat</em>, <em>price</em>, <em>depth</em> et <em>cut</em></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> <span class="fu">select</span>(carat, price, depth, cut) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Passage d’une table <span class="math inline">\(nobs\times nvar\)</span> à une table <span class="math inline">\(nobs*nvar \times 2\)</span>.</p></li>
+<li><p>Exemple : garder les valeurs de <em>carat</em> pour chaque observation :</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> <span class="fu">select</span>(carat, price, depth, cut) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="sc">-</span>carat, <span class="at">key=</span><span class="st">"key"</span>, <span class="at">value=</span><span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="gestion-des-tables-complexes-avec-gather-2" class="level2">
+<h2 class="anchored" data-anchor-id="gestion-des-tables-complexes-avec-gather-2">Gestion des tables complexes avec <em>gather</em> (2)</h2>
+<ul>
+<li>Exemple : Représentation de <em>price</em> et <em>depth</em> en fonction de <em>carat</em></li>
+</ul>
+<div class="cell">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> <span class="fu">select</span>(carat,price,depth) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="sc">-</span>carat, <span class="at">key =</span> <span class="st">"var"</span>, <span class="at">value =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(carat, value))<span class="sc">+</span><span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">facets=</span>var<span class="sc">~</span>., <span class="at">scales=</span><span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gestion-des-tables-complexes-avec-gather-3" class="level2">
+<h2 class="anchored" data-anchor-id="gestion-des-tables-complexes-avec-gather-3">Gestion des tables complexes avec <em>gather</em> (3)</h2>
+<ul>
+<li>Exemple : Représentation de <em>price</em> et <em>depth</em> en fonction de <em>carat</em>, avec une couleur par modalité de <em>cut</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> <span class="fu">select</span>(carat,price,depth, cut) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="sc">-</span>carat, <span class="sc">-</span>cut, <span class="at">key =</span> <span class="st">"var"</span>, <span class="at">value =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(carat, value, <span class="at">color=</span>cut))<span class="sc">+</span><span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">facets=</span>var<span class="sc">~</span>., <span class="at">scales=</span><span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tp-exercice-4-avec-avec-ggplot2-scales-dplyr-et-tidyr" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-4-avec-avec-ggplot2-scales-dplyr-et-tidyr">TP : Exercice 4 avec avec ggplot2, scales, dplyr et tidyr</h2>
+<ul>
+<li><p>Reprendre le graphique de la distribution des espèces en barre empilée créé dans l’exercice 1.</p>
+<ul>
+<li>Changer la position de la légende</li>
+<li>Changer le titre de la légende</li>
+</ul></li>
+<li><p>Représenter les nuages de points des trois variables <em>Sepal.Length</em>, <em>Petal.Width</em> et <em>Petal.Length</em> en fonction de la variable <em>Sepal.Width</em>.</p></li>
+<li><p>Reprendre le graphique précédent et colorer les points suivant les espèces.</p></li>
+</ul>
+</section>
+<section id="réordonner-les-modalités" class="level2">
+<h2 class="anchored" data-anchor-id="réordonner-les-modalités">Réordonner les modalités</h2>
+<ul>
+<li><p>Librairie <em>forcats</em> : permet de réordonner les modalités d’une variable selon les valeurs d’une autre variable.</p></li>
+<li><p>Deux fonctions :</p>
+<ul>
+<li><p><em>fct_reorder()</em> : répartition par ordre croissant ou décroissant,</p></li>
+<li><p><em>fct_shuffle()</em> : répartition aléatoire.</p></li>
+</ul></li>
+<li><p>Exemple : représentation de la moyenne de <em>price</em> en fonction des valeurs de <em>cut</em>, en réordonnant les valeurs de la table résumée <em>df</em> suivant les modalités de <em>cut</em></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(cut) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> T),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd =</span> <span class="fu">sd</span>(price, <span class="at">na.rm =</span> T)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="réordonner-les-modalités-2" class="level2">
+<h2 class="anchored" data-anchor-id="réordonner-les-modalités-2">Réordonner les modalités (2)</h2>
+<ul>
+<li>Ordre original</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(cut, mean))<span class="sc">+</span><span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="réordonner-les-modalités-3" class="level2">
+<h2 class="anchored" data-anchor-id="réordonner-les-modalités-3">Réordonner les modalités (3)</h2>
+<ul>
+<li>Réordonner les modalités de <em>cut</em> par ordre croissant de la moyenne de <em>price</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="fu">fct_reorder</span>(cut, mean), mean))<span class="sc">+</span><span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="réordonner-les-modalités-4" class="level2">
+<h2 class="anchored" data-anchor-id="réordonner-les-modalités-4">Réordonner les modalités (4)</h2>
+<ul>
+<li>Réordonner par ordre décroissant de la moyenne</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  df, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="fu">fct_reorder</span>(cut, mean, <span class="at">.desc =</span> <span class="cn">TRUE</span>), mean)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="réordonner-les-modalités-5" class="level2">
+<h2 class="anchored" data-anchor-id="réordonner-les-modalités-5">Réordonner les modalités (5)</h2>
+<ul>
+<li>Réordonner aléatoirement les modalités de <em>cut</em></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="fu">fct_shuffle</span>(cut), mean))<span class="sc">+</span><span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gestion-de-la-représentation-simultanée" class="level2">
+<h2 class="anchored" data-anchor-id="gestion-de-la-représentation-simultanée">Gestion de la représentation simultanée</h2>
+<p>Trois syntaxes donnant le même résultat :</p>
+<ul>
+<li>données et variable spécifiées pour l’ensemble des couches.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>données spécifiées pour l’ensemble des couches, variables à spécifier dans chaque couche.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>données et variables à spécifier dans chaque couche.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> diamonds, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Utile pour représenter sur le même graphique des données issues de tables différentes.</li>
+</ul>
+</section>
+<section id="gestion-de-la-représentation-simultanée-2" class="level2">
+<h2 class="anchored" data-anchor-id="gestion-de-la-représentation-simultanée-2">Gestion de la représentation simultanée (2)</h2>
+<ul>
+<li>Exemple : ajouter la moyenne, ainsi qu’un indicateur de dispersion (avec <em>geom_errorbar()</em>) sur les boîtes à moustaches du prix suivant la variable <em>cut</em>.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(cut, price, <span class="at">color =</span> cut)) <span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> df, </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> mean, </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ymin =</span> mean <span class="sc">-</span> sd, </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ymax =</span> mean <span class="sc">+</span> sd), </span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"gray70"</span>, <span class="at">width =</span> .<span class="dv">4</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df, </span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> mean), </span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="gestion-de-la-représentation-simultanée-3" class="level2">
+<h2 class="anchored" data-anchor-id="gestion-de-la-représentation-simultanée-3">Gestion de la représentation simultanée (3)</h2>
+<ul>
+<li>Résultat du code précédent</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tp-exercice-5-avec-ggplot2-scales-et-forcats" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-5-avec-ggplot2-scales-et-forcats">TP : Exercice 5 avec ggplot2, scales et forcats</h2>
+<ul>
+<li><p>Reprendre les 3 histogrammes par espèce créés dans l’exercice 3. Ajouter une ligne verticale représentant la moyenne pour chaque espèce (indication : <em>geom_vline</em>).</p></li>
+<li><p>Créer une table de données <em>df</em> résumant la variable <em>Sepal.Length</em> par ses moyennes et écart-types par espèce.</p></li>
+<li><p>Reprendre les boîtes à moustaches crées dans l’exercice 1. Colorer chaque boîte à moustaches et enlever la légende.</p></li>
+<li><p>Ajouter sur chaque boîte à moustache la moyenne (sous forme de point) et l’écart-type (sous forme de barre).</p></li>
+<li><p>Refaire le graphique précédent en réordonnant les modalités par moyenne décroissante.</p></li>
+</ul>
+</section>
+<section id="tp-exercice-6-avec-ggplot2-dplyr-tidyr-et-readr" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-6-avec-ggplot2-dplyr-tidyr-et-readr">TP : Exercice 6 avec ggplot2, dplyr, tidyr et readr</h2>
+<ul>
+<li><p>Reprendre les données de la banque mondiale. Créer deux tables (une large et une longue) avec uniquement les valeurs estimées. Créer un indicateur de données manquantes dans la table longue.</p></li>
+<li><p>Représenter sur un graphique l’évolution du pourcentage de données manquantes en fonction de l’année. Indication : changer les étiquettes de la variable <em>annee</em> en valeurs numériques</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">substring</span>(annee, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Créer la table longue restreinte aux valeurs du contrôle de la corruption et représenter sa distribution en fonction de l’année.</p></li>
+<li><p>Représenter la courbe de l’évolution en moyenne en fonction de l’année. Mettre des noms et un titre appropriés au graphique.</p></li>
+<li><p>Ajouter au graphique précédent l’évolution des pays “France”, “Somalia” et “Denmark”, avec une légende correcte ainsi qu’une couleur par pays.</p></li>
+</ul>
+</section>
+<section id="cartographie" class="level2">
+<h2 class="anchored" data-anchor-id="cartographie">Cartographie</h2>
+<ul>
+<li><p><strong>Carte choroplèthe</strong> : carte géographique dont chaque zone est colorée selon une mesure statistique.</p></li>
+<li><p>Etape 1 : charger les données géographiques, par exemple directement sur le web avec <em>geojson_read()</em></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geojsonio)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>etats <span class="ot">=</span> <span class="fu">geojson_read</span>(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'https://datahub.io/core/geo-countries/r/countries.geojson'</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">what =</span> <span class="st">"sp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>où l’option <em>what</em> règle le format d’importation. Ici, on importe au format <em>“spatial”</em>.</p></li>
+<li><p>Ici, <em>etats</em> contient toutes les informations nécessaires à la constitution de la carte (latitudes, longitudes, noms des pays, etc…)</p></li>
+</ul>
+</section>
+<section id="cartographie-2" class="level2">
+<h2 class="anchored" data-anchor-id="cartographie-2">Cartographie (2)</h2>
+<ul>
+<li>Etape 2 : représentation de la carte. Exemple avec <em>ggplot2</em> (après convertion de la table pour ggplot2 avec <em>fortify</em>)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>etats_f <span class="ot">=</span> <span class="fu">fortify</span>(etats)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(etats_f, <span class="fu">aes</span>(long, lat, <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>où <em>theme_void()</em> indique un thème vide.</p>
+</section>
+<section id="cartographie-3" class="level2">
+<h2 class="anchored" data-anchor-id="cartographie-3">Cartographie (3)</h2>
+<ul>
+<li>Etape 3 : colorer chaque zone en fonction d’une mesure statistique. Ici on associe à chaque zone une valeur aléatoire entre <span class="math inline">\(0\)</span> et <span class="math inline">\(1\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble) <span class="co"># pour rownames_to_column</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>etats<span class="sc">@</span>data<span class="sc">$</span>var <span class="ot">=</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(etats<span class="sc">@</span>data))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>etats_f <span class="ot">=</span> <span class="fu">fortify</span>(etats)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>etats_fj <span class="ot">=</span> etats_f <span class="sc">%&gt;%</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(etats<span class="sc">@</span>data <span class="sc">%&gt;%</span> <span class="fu">rownames_to_column</span>(<span class="st">"id"</span>), </span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">by =</span> <span class="st">"id"</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(etats_fj, </span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(long, lat, <span class="at">group =</span> group, <span class="at">fill =</span> var)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cartographie-avec-leaflet" class="level2">
+<h2 class="anchored" data-anchor-id="cartographie-avec-leaflet">Cartographie avec leaflet</h2>
+<ul>
+<li><p>Personnalisation et interaction utilisateur avec la librairie <em>leaflet</em> (voir <a href="https://rstudio.github.io/leaflet/">ici</a> pour une présentation complète de la librairie).</p></li>
+<li><p>Création d’une carte en 3 étapes :</p>
+<ul>
+<li>Etape 1 : création de la carte avec <em>leaflet()</em>,</li>
+<li>Etape 2 : ajout d’un fond de carte avec <em>addTiles()</em> (voir <a href="http://leaflet-extras.github.io/leaflet-providers/preview/index.html">ici</a> pour les différents fonds de carte),</li>
+<li>Etape 3 : ajout des polygones avec <em>addPolygons()</em>.</li>
+</ul></li>
+<li><p>Exemple avec les données géographiques <em>etats</em></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(etats) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Remarque : avec <em>leaflet</em>, ici pas besoin de re-configurer les données.</li>
+</ul>
+</section>
+<section id="cartographie-avec-leaflet-2" class="level2">
+<h2 class="anchored" data-anchor-id="cartographie-avec-leaflet-2">Cartographie avec leaflet (2)</h2>
+<ul>
+<li>Association des mesures statistiques à une palette de couleur avec la fonction <em>colorBin()</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>palette <span class="ot">=</span> <span class="fu">colorBin</span>(<span class="st">"YlOrRd"</span>, <span class="at">domain =</span> etats<span class="sc">$</span>var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>où
+<ul>
+<li><em>“YlOrd”</em> définit la palette de couleurs (ici entre jaune et rouge, voir <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">color brewer</a> ou <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">veridis</a> pour d’autres choix de palettes),</li>
+<li><em>domain</em> definit les mesures à associer aux couleurs.</li>
+</ul></li>
+<li>Représentation de la carte choroplèthe en indiquant que la couleur de remplissage est fonction de la palette et de la variable avec <em>fillColor</em>, et en réglant l’opacité des couleurs avec <em>fillOpacity</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(etats) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">fillColor =</span> <span class="sc">~</span><span class="fu">palette</span>(var), </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fillOpacity =</span> .<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cartographie-avec-leaflet-3" class="level2">
+<h2 class="anchored" data-anchor-id="cartographie-avec-leaflet-3">Cartographie avec leaflet (3)</h2>
+<ul>
+<li>Amélioration de la carte précédente : personnalisation de la palette</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>palette <span class="ot">=</span> <span class="fu">colorBin</span>(</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"magma"</span>, </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">domain =</span> etats<span class="sc">$</span>var, </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">bins =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">by =</span> .<span class="dv">2</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>où l’option <em>bins</em> définit le découpage des valeurs de la mesure en classes, chaque classe étant ensuite associée à une couleur (valeur par défaut = <span class="math inline">\(7\)</span>).</li>
+</ul>
+</section>
+<section id="cartographie-avec-leaflet-4" class="level2">
+<h2 class="anchored" data-anchor-id="cartographie-avec-leaflet-4">Cartographie avec leaflet (4)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(etats) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lat =</span> <span class="dv">0</span>, <span class="at">lng =</span> <span class="dv">0</span>, <span class="at">zoom =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillColor =</span> <span class="sc">~</span><span class="fu">palette</span>(var), </span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> .<span class="dv">5</span>,</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"gray30"</span>, </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight =</span> <span class="fl">1.5</span>, </span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span>, </span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">dashArray =</span> <span class="st">"2"</span></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">pal =</span> palette, </span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="sc">~</span>var, </span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="fl">0.8</span>, </span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Variable aleatoire"</span>,</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"bottomright"</span></span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tp-exercice-7-avec-geojsonio-leaflet-tibble-dplyr-et-readr" class="level2">
+<h2 class="anchored" data-anchor-id="tp-exercice-7-avec-geojsonio-leaflet-tibble-dplyr-et-readr">TP : Exercice 7 avec geojsonio, leaflet, tibble, dplyr et readr</h2>
+<ul>
+<li>Rreprendre les données et les graphiques de l’exercice 6. Représenter sur une carte la valeur du contrôle de la corruption en 2016 pour chaque pays. Ajouter au graphique un titre et des légendes convenables.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><i class="fa-solid fa-user-circle"></i> 2022 - Romuald ZAMI</div>   
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ <img src="../../images/animation_transparent.png" width="auto" height="60px">
+  </li>  
+</ul>
+      </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/robertmitchellv">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/Romu_Zam">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/robertmitchellv">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
