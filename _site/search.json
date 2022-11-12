@@ -53,7 +53,7 @@
     "href": "projects.html",
     "title": "Romuald ZAMI",
     "section": "",
-    "text": "LA County COVID-19 Dashboard\n\n\n\n\n\n\n\n\n\n\n\n\nApr 2, 2020\n\n\nRobert Mitchell\n\n\n\n\n\n\nNo matching items"
+    "text": "No matching items"
   },
   {
     "objectID": "blog/2016-09-building-this-site-with-rmd/building-site-with-rmarkdown.html",
@@ -620,7 +620,7 @@
     "href": "talks/Cours visualisation/index.html#changement-déchelle-2",
     "title": "Cours de visualisation des données",
     "section": "Changement d’échelle (2)",
-    "text": "Changement d’échelle (2)\n\nExemple : changer l’effectif en fréquence dans le diagramme précédent en utilisant la variable ..count.. créée par geom_bar()\n\n\nggplot(diamonds, aes(x=\"\", fill=cut))+\n  geom_bar(aes(y=..count../sum(..count..)))\n\nWarning: The dot-dot notation (`..count..`) was deprecated in ggplot2 3.4.0.\nℹ Please use `after_stat(count)` instead."
+    "text": "Changement d’échelle (2)\n\nExemple : changer l’effectif en fréquence dans le diagramme précédent en utilisant la variable ..count.. créée par geom_bar()\n\n\nggplot(diamonds, aes(x=\"\", fill=cut))+\n  geom_bar(aes(y=..count../sum(..count..)))"
   },
   {
     "objectID": "talks/Cours visualisation/index.html#changement-déchelle-3",
@@ -887,5 +887,75 @@
     "title": "About",
     "section": "",
     "text": "About this blog"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "talks/Cours visualisation/index.html#cartographie",
+    "href": "talks/Cours visualisation/index.html#cartographie",
+    "title": "Cours de visualisation des données",
+    "section": "Cartographie",
+    "text": "Cartographie\n\nCarte choroplèthe : carte géographique dont chaque zone est colorée selon une mesure statistique.\nEtape 1 : charger les données géographiques, par exemple directement sur le web avec geojson_read()\n\n\nlibrary(geojsonio)\netats = geojson_read(\n  'https://datahub.io/core/geo-countries/r/countries.geojson',\n  what = \"sp\")\n\n\noù l’option what règle le format d’importation. Ici, on importe au format “spatial”.\nIci, etats contient toutes les informations nécessaires à la constitution de la carte (latitudes, longitudes, noms des pays, etc…)"
+  },
+  {
+    "objectID": "talks/Cours visualisation/index.html#cartographie-2",
+    "href": "talks/Cours visualisation/index.html#cartographie-2",
+    "title": "Cours de visualisation des données",
+    "section": "Cartographie (2)",
+    "text": "Cartographie (2)\n\nEtape 2 : représentation de la carte. Exemple avec ggplot2 (après convertion de la table pour ggplot2 avec fortify)\n\n\netats_f = fortify(etats)\nggplot(etats_f, aes(long, lat, group = group)) +\n  geom_polygon(color = \"white\") +\n  theme_void()\n\noù theme_void() indique un thème vide."
+  },
+  {
+    "objectID": "talks/Cours visualisation/index.html#cartographie-3",
+    "href": "talks/Cours visualisation/index.html#cartographie-3",
+    "title": "Cours de visualisation des données",
+    "section": "Cartographie (3)",
+    "text": "Cartographie (3)\n\nEtape 3 : colorer chaque zone en fonction d’une mesure statistique. Ici on associe à chaque zone une valeur aléatoire entre \\(0\\) et \\(1\\)\n\n\nlibrary(tibble) # pour rownames_to_column\netats@data$var = runif(nrow(etats@data))\netats_f = fortify(etats)\netats_fj = etats_f %>%\n  inner_join(etats@data %>% rownames_to_column(\"id\"), \n             by = \"id\")\nggplot(etats_fj, \n       aes(long, lat, group = group, fill = var)\n       ) +\n  geom_polygon(color = \"white\") +\n  theme_void()"
+  },
+  {
+    "objectID": "talks/Cours visualisation/index.html#cartographie-avec-leaflet",
+    "href": "talks/Cours visualisation/index.html#cartographie-avec-leaflet",
+    "title": "Cours de visualisation des données",
+    "section": "Cartographie avec leaflet",
+    "text": "Cartographie avec leaflet\n\nPersonnalisation et interaction utilisateur avec la librairie leaflet (voir ici pour une présentation complète de la librairie).\nCréation d’une carte en 3 étapes :\n\nEtape 1 : création de la carte avec leaflet(),\nEtape 2 : ajout d’un fond de carte avec addTiles() (voir ici pour les différents fonds de carte),\nEtape 3 : ajout des polygones avec addPolygons().\n\nExemple avec les données géographiques etats\n\n\nlibrary(leaflet)\nleaflet(etats) %>% \n  addTiles() %>%\n  addPolygons()\n\n\nRemarque : avec leaflet, ici pas besoin de re-configurer les données."
+  },
+  {
+    "objectID": "talks/Cours visualisation/index.html#cartographie-avec-leaflet-2",
+    "href": "talks/Cours visualisation/index.html#cartographie-avec-leaflet-2",
+    "title": "Cours de visualisation des données",
+    "section": "Cartographie avec leaflet (2)",
+    "text": "Cartographie avec leaflet (2)\n\nAssociation des mesures statistiques à une palette de couleur avec la fonction colorBin()\n\n\npalette = colorBin(\"YlOrRd\", domain = etats$var)\n\n\noù\n\n“YlOrd” définit la palette de couleurs (ici entre jaune et rouge, voir color brewer ou veridis pour d’autres choix de palettes),\ndomain definit les mesures à associer aux couleurs.\n\nReprésentation de la carte choroplèthe en indiquant que la couleur de remplissage est fonction de la palette et de la variable avec fillColor, et en réglant l’opacité des couleurs avec fillOpacity\n\n\nleaflet(etats) %>% \n  addTiles() %>%\n  addPolygons(fillColor = ~palette(var), \n              fillOpacity = .5)"
+  },
+  {
+    "objectID": "talks/Cours visualisation/index.html#cartographie-avec-leaflet-3",
+    "href": "talks/Cours visualisation/index.html#cartographie-avec-leaflet-3",
+    "title": "Cours de visualisation des données",
+    "section": "Cartographie avec leaflet (3)",
+    "text": "Cartographie avec leaflet (3)\n\nAmélioration de la carte précédente : personnalisation de la palette\n\n\npalette = colorBin(\n  \"magma\", \n  domain = etats$var, \n  bins = seq(0, 1, by = .2)\n  )\n\n\noù l’option bins définit le découpage des valeurs de la mesure en classes, chaque classe étant ensuite associée à une couleur (valeur par défaut = \\(7\\))."
+  },
+  {
+    "objectID": "talks/Cours visualisation/index.html#cartographie-avec-leaflet-4",
+    "href": "talks/Cours visualisation/index.html#cartographie-avec-leaflet-4",
+    "title": "Cours de visualisation des données",
+    "section": "Cartographie avec leaflet (4)",
+    "text": "Cartographie avec leaflet (4)\n\nleaflet(etats) %>% \n  setView(lat = 0, lng = 0, zoom = 1) %>%\n  addTiles() %>%\n  addPolygons(\n    fillColor = ~palette(var), \n    fillOpacity = .5,\n    color = \"gray30\", \n    weight = 1.5, \n    opacity = 1, \n    dashArray = \"2\"\n  ) %>%\n  addLegend(\n    pal = palette, \n    values = ~var, \n    opacity = 0.8, \n    title = \"Variable aleatoire\",\n    position = \"bottomright\"\n  )"
+  },
+  {
+    "objectID": "talks/Cours visualisation/index.html#tp-exercice-7-avec-geojsonio-leaflet-tibble-dplyr-et-readr",
+    "href": "talks/Cours visualisation/index.html#tp-exercice-7-avec-geojsonio-leaflet-tibble-dplyr-et-readr",
+    "title": "Cours de visualisation des données",
+    "section": "TP : Exercice 7 avec geojsonio, leaflet, tibble, dplyr et readr",
+    "text": "TP : Exercice 7 avec geojsonio, leaflet, tibble, dplyr et readr\n\nRreprendre les données et les graphiques de l’exercice 6. Représenter sur une carte la valeur du contrôle de la corruption en 2016 pour chaque pays. Ajouter au graphique un titre et des légendes convenables."
   }
 ]

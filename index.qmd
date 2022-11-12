@@ -24,46 +24,36 @@ listing:
 ::: center-text
 #### *Vous trouverez sur ce blog un ensemble de documents relatifs au language* {{< fa brands r-project >}} *et plus encore...*{{< fa puzzle-piece >}}
 
-</br></br>
-`Ci dessous, les documents les plus récents :`
-
+</br></br> `Ci dessous, les documents les plus récents :`
 :::
+
 ::: content-block
 ::: features
 ::: feature
 ::: feature-top
 ### Blog
 
-
 ::: {#listing-blog}
 :::
 :::
-
-
 :::
 
 ::: feature
 ::: feature-top
 ### Réalisations
 
-
 ::: {#listing-talks}
 :::
 :::
-
-
 :::
 
 ::: feature
 ::: feature-top
 ### Projets
 
-
 ::: {#listing-projects}
 :::
 :::
-
-
 :::
 :::
 :::

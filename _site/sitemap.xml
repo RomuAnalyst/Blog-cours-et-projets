@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://robertmitchellv.com/index.html</loc>
-    <lastmod>2022-11-12T11:36:29.443Z</lastmod>
+    <lastmod>2022-11-12T12:03:54.914Z</lastmod>
   </url>
   <url>
     <loc>https://robertmitchellv.com/vitae.html</loc>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://robertmitchellv.com/talks.html</loc>
-    <lastmod>2022-11-12T11:36:30.132Z</lastmod>
+    <lastmod>2022-11-12T12:03:55.743Z</lastmod>
   </url>
   <url>
     <loc>https://robertmitchellv.com/projects/2020-04-covid19-dashboard/index.html</loc>
@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://robertmitchellv.com/projects.html</loc>
-    <lastmod>2022-11-11T22:43:26.931Z</lastmod>
+    <lastmod>2022-11-12T11:56:56.721Z</lastmod>
   </url>
   <url>
     <loc>https://robertmitchellv.com/blog/2016-09-building-this-site-with-rmd/building-site-with-rmarkdown.html</loc>
@@ -86,15 +86,15 @@
   </url>
   <url>
     <loc>https://robertmitchellv.com/blog.html</loc>
-    <lastmod>2022-11-12T11:32:58.603Z</lastmod>
+    <lastmod>2022-11-12T11:58:24.036Z</lastmod>
   </url>
   <url>
     <loc>https://robertmitchellv.com/talks/Cours manipulation/index.html</loc>
-    <lastmod>2022-11-12T11:36:36.573Z</lastmod>
+    <lastmod>2022-11-12T11:58:08.035Z</lastmod>
   </url>
   <url>
     <loc>https://robertmitchellv.com/talks/Cours visualisation/index.html</loc>
-    <lastmod>2022-11-12T11:29:12.733Z</lastmod>
+    <lastmod>2022-11-12T12:04:02.732Z</lastmod>
   </url>
   <url>
     <loc>https://robertmitchellv.com/Blog projets/posts/post-with-code/index.html</loc>
@@ -111,5 +111,13 @@
   <url>
     <loc>https://robertmitchellv.com/Blog projets/about.html</loc>
     <lastmod>2022-11-12T11:26:45.399Z</lastmod>
+  </url>
+  <url>
+    <loc>https://robertmitchellv.com/posts/post-with-code/index.html</loc>
+    <lastmod>2022-11-12T11:57:56.598Z</lastmod>
+  </url>
+  <url>
+    <loc>https://robertmitchellv.com/posts/welcome/index.html</loc>
+    <lastmod>2022-11-12T11:57:57.204Z</lastmod>
   </url>
 </urlset>
